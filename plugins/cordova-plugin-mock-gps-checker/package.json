@@ -1,0 +1,55 @@
+{
+  "_from": "cordova-plugin-mock-gps-checker",
+  "_id": "cordova-plugin-mock-gps-checker@1.0.2",
+  "_inBundle": false,
+  "_integrity": "sha512-lQqiOyGC+GBew3u0c0F9GzkaQKhFuoHZDj8qWcd31KeKv8e9sHbXgRl2C0IUPPOYLzy+U1SFLF1zRInOVI7YgA==",
+  "_location": "/cordova-plugin-mock-gps-checker",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "cordova-plugin-mock-gps-checker",
+    "name": "cordova-plugin-mock-gps-checker",
+    "escapedName": "cordova-plugin-mock-gps-checker",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-mock-gps-checker/-/cordova-plugin-mock-gps-checker-1.0.2.tgz",
+  "_shasum": "8dc61ab6d4615e0b4ed655a064c8ef13efe0eb31",
+  "_spec": "cordova-plugin-mock-gps-checker",
+  "_where": "C:\\Users\\HP\\THUNDERPROJECT\\KONTENA\\tim",
+  "author": {
+    "name": "Sandata"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-mock-gps-checker",
+    "platforms": "android"
+  },
+  "deprecated": false,
+  "description": "Cordova Mock Gps Checker Plugin",
+  "homepage": "",
+  "keywords": [
+    "cordova",
+    "mock",
+    "location",
+    "checker",
+    "mock-location"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "cordova-plugin-mock-gps-checker",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.2"
+}

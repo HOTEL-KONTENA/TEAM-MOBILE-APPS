@@ -1,0 +1,25 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "id.thunderlab.kontenaPartner"
+    },
+    "cordova-plugin-camera": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.+",
+      "PACKAGE_NAME": "id.thunderlab.kontenaPartner"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "id.thunderlab.kontenaPartner"
+    },
+    "cordova-plugin-mock-gps-checker": {
+      "PACKAGE_NAME": "id.thunderlab.kontenaTeam"
+    }
+  },
+  "dependent_plugins": {}
+}
