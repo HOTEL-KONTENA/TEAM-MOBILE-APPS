@@ -1,18 +1,21 @@
+// window.plugins.flashlight.available(function(isAvailable) {
+//   if (!isAvailable) {
+//     alert("HANYA BISA ABSEN MELALUI DEVICE DENGAN FLASHLIGHT");
+//   }
+// });
+
 let app = {
     init: function(){
         document.getElementById('takePhoto').addEventListener('click', app.takephoto);
     },
     takephoto: function(){
         let opts = {
-            // quality: 80,
+            quality: 80,
             destinationType: Camera.DestinationType.DATA_URL,
             sourceType: Camera.PictureSourceType.CAMERA,
             mediaType: Camera.MediaType.PICTURE,
             encodingType: Camera.EncodingType.JPEG,
             cameraDirection: 1,
-            // targetWidth: 300,
-            // targetHeight: 400
-        
         };
         
         navigator.camera.getPicture(app.ftw, app.wta, opts);

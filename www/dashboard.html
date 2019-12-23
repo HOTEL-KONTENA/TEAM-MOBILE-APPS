@@ -18,81 +18,98 @@
     under the License.
 -->
 <html>
-    <head>
-    <link rel="stylesheet" type="text/css" href="mobileui/style.css">
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>KONTENA TEAM</title>
-    </head>
-    <body class="content">
-      <div class="cover no-padding" style="background-image:url(img/header.jpg); opacity: 80%">
-        <div class="space-big"></div>
-        <div class="space-huge"></div>
-        <div class="list gradient no-border">
-          <div class="item space-small row text-white align-center">
-            <div class="col">
-              <span class="text-big text-bold numbers text-black" id="teamName">NAME</span>
-              <p class="text-small text-light text-grey-400" id="teamRole">ROLE</p>
-            </div>
+  <head>
+  <link rel="stylesheet" type="text/css" href="mobileui/style.css">
+      <!--
+      Customize this policy to fit your own app's needs. For more guidance, see:
+          https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+      Some notes:
+          * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+          * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+          * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+              * Enable inline JS: add 'unsafe-inline' to default-src
+      -->
+      <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'; img-src 'self' data:;" />
+      <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
+      <meta name="format-detection" content="telephone=no">
+      <meta name="msapplication-tap-highlight" content="no">
+      <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+      <link rel="stylesheet" type="text/css" href="css/index.css">
+      <title>KONTENA TEAM</title>
+  </head>
+  <body class="content has-footer">
+    <div class="footer green shadow tab">
+      <button class="icon ion-android-home active" onclick="openMyTab('myTabHome', 'homeTab')" id="homeTab">Home</button>
+      <button class="icon ion-android-people" onclick="openMyTab('myTabSDM', 'sdmTab')" id="sdmTab">SDM</button>
+      <button class="icon ion-android-person" onclick="openMyTab('myTabProfile', 'profileTab')" id="profileTab">Profile</button>
+    </div>
+    <div class="cover no-padding" style="background-image:url(img/header.jpg); opacity: 80%">
+      <div class="space-big"></div>
+      <div class="space-huge"></div>
+      <div class="list gradient no-border">
+        <div class="item space-small row text-white align-center">
+          <div class="col">
+            <span class="text-big text-bold numbers text-black teamName">NAME</span>
+            <p class="text-small text-light text-grey-400 teamRole">ROLE</p>
           </div>
         </div>
       </div>
-      
-      <div class="list">
+    </div>
+    <div class="tab-content active" id="myTabHome">
+      <div id="announcement" class="padding"></div>
+      <div class="list" id="guestSection">
         <div class="item" style="background-color: #EFEFEF">
-          <p class="text-grey-500" onclick="reportingToggle()"><strong>LAPOR KEHADIRAN</strong></p>
+          <p class="text-grey-500"><strong>INFO TAMU</strong></p>
+        </div>
+        <div class="item status">
+          <p class="text-grey-500">Tidak ada record aktivitas tamu</p>
         </div>
       </div>
-      <div class="list" id="reportingSection">
-        <div class="item align-center" id="formReport">
-          <div class="row" style="margin-bottom: 15px;">
-              <div class="col" style="padding:15px">
-                <img src="img/camera.png" id="takePhoto">
-              </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <input type="checkbox" name="is_in_office" value="true" style="margin-top: 3px;" id="input.is_in_office"> kehadiran di kantor
-              <br/><br/><button class="shadow circle green ion-paper-airplane" onclick="reporting()"></button>
-            </div>
+    </div>
+    <div class="tab-content" id="myTabSDM">
+      <div class="list radius white">
+        <div class="item" onclick="onReporting()">
+          <h2>Lapor Kehadiran</h2>
+          <div class="right">
+              <i class="icon ion-ios-arrow-right"></i>
           </div>
         </div>
-        <div class="item align-center" id="sendingReport">
-          <i class="float-center" style="font-size:11px;">sedang memproses data Anda</i>
+        <div class="item" onclick="onReported()">
+          <h2>Lihat Laporan Kehadiran</h2>
+          <div class="right">
+              <i class="icon ion-ios-arrow-right"></i>
+          </div>
         </div>
       </div>
-      <div class="list">
-        <div class="item" style="background-color: #EFEFEF">
-          <p class="text-grey-500" onclick="reportedToggle()"><strong>LAPORAN KEHADIRAN HARI INI</strong></p>
-        </div>
-      </div>
+    </div>
 
-      <div class="list" id="reportedSection">
-        <div class="item align-center history">
-          <i class="float-center" style="font-size:11px;">tidak ada riwayat absent</i>
+        
+    <div class="tab-content" id="myTabProfile">
+      <div class="list radius white">
+        <div class="item" onclick="onInbox()">
+          <h2>Kotak Masuk</h2>
+          <div class="right">
+              <i class="icon ion-ios-arrow-right"></i>
+          </div>
+        </div>
+        <div class="item" onclick="onChangePassword()">
+          <h2>Ubah Password</h2>
+          <div class="right">
+              <i class="icon ion-ios-arrow-right"></i>
+          </div>
+        </div>
+        <div class="item" onclick="onLogout()">
+          <h2>Logout</h2>
+          <div class="right">
+              <i class="icon ion-ios-arrow-right"></i>
+          </div>
         </div>
       </div>
-       
-    <button class="red circle icon ion-power shadow float-bottom-right" onclick="onLogout()"></button>
+    </div>
     
     <script src="cordova.js"></script>
     <script type="text/javascript" src="mobileui/mobileui.js"></script>
-    <script type="text/javascript" src="js/camera.js"></script>
-    <script type="text/javascript" src="js/gps.js"></script>
-    <script type="text/javascript" src="js/mock.js"></script>
+    <script type="text/javascript" src="js/global.js"></script>
     <script type="text/javascript" src="js/dashboard.js"></script>
-    <script type="text/javascript" src="js/logout.js"></script>
   </body>
 </html>

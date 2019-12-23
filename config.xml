@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="id.thunderlab.kontenaTeam" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Kontena Team</name>
+<widget id="id.thunderlab.kontenaTeam" version="1.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Kontena Team - TRIAL!</name>
     <icon density="mdpi" height="57" platform="ios" src="www/img/logo.png" width="57" />
     <description>
         Untuk Team Kontena
@@ -12,6 +12,7 @@
     <preference name="DisallowOverscroll" value="true" />
     <access origin="*" />
     <preferance name="android-usesCleartextTraffic" value="true" />
+    <preference name="orientation" value="portrait" />
     <allow-navigation href="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

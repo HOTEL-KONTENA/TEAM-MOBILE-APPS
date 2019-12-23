@@ -1,7 +1,7 @@
 document.addEventListener("deviceready", onDeviceReady, false);
  
 function onDeviceReady(){
-  navigator.geolocation.getCurrentPosition(onFindLoc, orFailLoc,{ maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });               
+  navigator.geolocation.getCurrentPosition(onFindLoc, orFailLoc,{ maximumAge: 3000, timeout: 5000, enableHighAccuracy: true });
 }
 
 function onFindLoc(position){
