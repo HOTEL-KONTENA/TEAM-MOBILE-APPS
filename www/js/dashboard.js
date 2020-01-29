@@ -60,7 +60,7 @@ function room (){
         type: 'GET',
         // make sure you respect the same origin policy with this url:
         // http://en.wikipedia.org/wiki/Same_origin_policy
-        url: "http://128.199.145.173:9888/api/room/status",
+        url: "https://enginev1.hotelkontena.com/api/room/status",
         data: { has_user: true, group_by_room:true, created_at_gte: 'today', org_id : oid, status: ['OCCUPIED_DIRTY', 'VACANT_DIRTY'] },
         beforeSend: function (xhr) {
             /* Authorization header */

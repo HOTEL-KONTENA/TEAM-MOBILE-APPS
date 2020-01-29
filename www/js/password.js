@@ -14,7 +14,7 @@ function onSubmitNewPassword(){
         contentType: 'application/x-www-form-urlencoded',
         // make sure you respect the same origin policy with this url:
         // http://en.wikipedia.org/wiki/Same_origin_policy
-        url: "http://128.199.145.173:9888/api/password",
+        url: "https://enginev1.hotelkontena.com/api/password",
         data: { old_password: old_password, new_password: new_password, confirmation_password: confirmation_password },
         beforeSend: function (xhr) {
             /* Authorization header */
@@ -49,7 +49,7 @@ function onForgetPassword(){
         contentType: 'application/x-www-form-urlencoded',
         // make sure you respect the same origin policy with this url:
         // http://en.wikipedia.org/wiki/Same_origin_policy
-        url: "http://128.199.145.173:9888/api/forget",
+        url: "https://enginev1.hotelkontena.com/api/forget",
         data: { username: username},
         success: function(msg){
             if(msg.status==='success'){
@@ -74,7 +74,7 @@ function onResetPassword(){
         contentType: 'application/x-www-form-urlencoded',
         // make sure you respect the same origin policy with this url:
         // http://en.wikipedia.org/wiki/Same_origin_policy
-        url: "http://128.199.145.173:9888/api/reset",
+        url: "https://enginev1.hotelkontena.com/api/reset",
         data: { username: username,  password: password, token:token },
         success: function(msg){
             if(msg.status==='success'){

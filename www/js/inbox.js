@@ -21,7 +21,7 @@ function inbox (){
         type: 'GET',
         // make sure you respect the same origin policy with this url:
         // http://en.wikipedia.org/wiki/Same_origin_policy
-        url: "http://128.199.145.173:9888/api/inbox",
+        url: "https://enginev1.hotelkontena.com/api/inbox",
         data: { has_approved: 0, org_id: oid },
         beforeSend: function (xhr) {
             /* Authorization header */

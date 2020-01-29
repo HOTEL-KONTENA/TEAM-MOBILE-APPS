@@ -20,7 +20,7 @@ function reported (){
         type: 'GET',
         // make sure you respect the same origin policy with this url:
         // http://en.wikipedia.org/wiki/Same_origin_policy
-        url: "http://128.199.145.173:9888/api/hr/history",
+        url: "https://enginev1.hotelkontena.com/api/hr/history",
         data: { start: 'first day of this month', end: 'today', org_id : oid },
         beforeSend: function (xhr) {
             /* Authorization header */

@@ -45,7 +45,7 @@ function submitReport (){
         // make sure you respect the same origin policy with this url:
         // http://en.wikipedia.org/wiki/Same_origin_policy
         contentType: 'application/x-www-form-urlencoded',
-        url: "http://128.199.145.173:9888/api/hr/absent",
+        url: "https://enginev1.hotelkontena.com/api/hr/absent",
         data: { latitude: sessionStorage.getItem('input.latitude'),  longitude: sessionStorage.getItem('input.longitude'), image: sessionStorage.getItem('input.image'), is_in_office:  $("#is_in_office").prop("checked"), org_id : oid },
         beforeSend: function (xhr) {
             /* Authorization header */
