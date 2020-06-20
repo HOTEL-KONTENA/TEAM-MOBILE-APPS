@@ -3,6 +3,8 @@ function openMyTab(id, tab){
     $(".tab .icon").removeClass('active');
     $("#"+id).addClass('active');
     $("#"+tab).addClass('active');
+
+    this.notifs()
 }
 
 $(function() {
@@ -19,8 +21,8 @@ $(function() {
     //2. LOAD HOME SECTION
     //2A. LOAD ANNOUNCEMENT
     this.announcement()
-    //2B. LOAD TAMU
-    this.room()
+    //2B. LOAD NOTIF
+    // this.notifs()
 });
 
 function headline (){
@@ -44,24 +46,17 @@ function announcement (){
     }
 }
 
-function room (){
+function notifs (){
     const mN = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
       "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"
     ];
-
-    oid = 0
-    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
-    for (let i in ps) {
-        oid = ps[i].org_id
-    }
 
     $.ajax({
         crossDomain: true,
         type: 'GET',
         // make sure you respect the same origin policy with this url:
         // http://en.wikipedia.org/wiki/Same_origin_policy
-        url: "https://enginev1.hotelkontena.com/api/room/status",
-        data: { has_user: true, group_by_room:true, created_at_gte: 'today', org_id : oid, status: ['OCCUPIED_DIRTY', 'VACANT_DIRTY'] },
+        url: window.localStorage.getItem('base_url')+"/notif",
         beforeSend: function (xhr) {
             /* Authorization header */
             xhr.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem('user.jwt'));
@@ -69,22 +64,18 @@ function room (){
         },
         success: function(msg){
             if(msg.status==='success'){
-                $(".status").remove(); //remove all the tr's except first ,As you are using it as table headers.            
+                $("#notifSection .status").remove();       
                 if(!msg.data.length){
-                    var html = '<div class="item align-center status"><i class="float-center" style="font-size:11px;">tidak ada data tamu</i></div>'
-                    $('#guestSection').append(html); //append your new tr
+                    let html = '<div class="item status"><p class="text-grey-500">Tidak ada notifikasi baru</p></div>';
+                    $('#notifSection').append(html); //append your new tr
                 }
+
                 $(msg.data).each(function () {
-                    var h = new Date(this.created_at).getHours();
-                    h = ("0" + h).slice(-2);
-                    var m = new Date(this.created_at).getMinutes();
-                    m = ("0" + m).slice(-2);
-                    let note = 'Checked in to rm '+this.room.name;
-                    if(this.status === 'VACANT_DIRTY'){
-                        let note = 'Checked out from rm '+this.room.name;
-                    }
-                    var html = '<div class="item status"><div class="left"><i class="icon ion-home"></i></div><h2 class="text-green text-strong">'+this.user.name+'</h2><p class="text-grey-500">'+note+'</p><div class="right align-right text-small"><ul><li class="text-green text-strong">'+h+':'+m+'</li><li class=" text-grey-500">'+this.when+'</li></ul></div>';
-                    $('#guestSection').append(html); //append your new tr
+                    var d = new Date(this.updated_at).getDate();
+                    var m = mN[new Date(this.updated_at).getMonth()];
+                    var Y = new Date(this.updated_at).getFullYear();
+                    var html = '<div class="item status"><div class="row"><div class="col-40"><p class="align-center">'+d+' '+m+' '+Y+'</p></div><div class="col"><p class="text-grey-500 wrap">'+this.title+'</p></div></div></div></div>';
+                    $('#notifSection').append(html); //append your new tr
                 });
             }else{
                 alert(msg.message);

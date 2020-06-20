@@ -14,6 +14,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "cordova-android": "^8.1.0",
+    "cordova-ios": "^5.1.1",
     "cordova-jquery": "^0.1.6",
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-compat": "^1.2.0",
@@ -37,7 +38,8 @@
       "cordova-plugin-fcm-with-dependecy-updated": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   }
 }

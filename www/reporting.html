@@ -57,16 +57,56 @@
       </div>
     </div>
     <div class="content has-header padding">
-      <p id="instruction">Harap isikan data berikut</p>
       <div class="item align-center" id="formReport">
-        <div class="row" style="margin-bottom: 15px;">
-            <div class="col" style="padding:15px">
-              <img src="img/camera.png" id="takePhoto">
+        <div class="row">
+          <div class="col">
+            <div class="list">
+              <div class="item small-space grey-300 text-grey-700">
+                <p>
+                  FOTO ANDA HARI INI
+                </p>
+              </div>
+              <div class="item">
+                <img src="img/camera.png" id="takePhoto">
+              </div>
             </div>
+          </div>
         </div>
         <div class="row">
           <div class="col">
-            <input type="checkbox" name="is_in_office" style="margin-top: 0px;" id="is_in_office"> kehadiran di kantor
+            <div class="list" id="scheduleScetion">
+              <div class="item small-space grey-300 text-grey-700">
+                <p>
+                  JADWAL ANDA HARI INI
+                </p>
+              </div>
+              <div class="item schedules">
+                <p>Belum ada schedule</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+         <div class="row">
+          <div class="col">
+            <div class="list">
+              <div class="item small-space grey-300 text-grey-700">
+                <p>
+                  LOKASI ABSEN ANDA HARI INI
+                </p>
+              </div>
+              <div class="item">
+                <p>Kehadiran di kantor</p>
+                <div class="right">
+                  <input type="checkbox" name="is_in_office" class="teal" id="is_in_office">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
           </div>
         </div>
         <div class="row" style="padding:25px">

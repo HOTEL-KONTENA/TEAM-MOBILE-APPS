@@ -8,7 +8,6 @@ screen.orientation.lock('portrait-primary').then(function success() {
 function onLogin(){
     const username = $('#loginPhone').val();
     const password = $('#loginPassword').val();
-        
     if (typeof FCMPlugin != 'undefined') {
         FCMPlugin.getToken(function (fcmtoken) {
             $.ajax({
@@ -17,7 +16,7 @@ function onLogin(){
                 contentType: 'application/x-www-form-urlencoded',
                 // make sure you respect the same origin policy with this url:
                 // http://en.wikipedia.org/wiki/Same_origin_policy
-                url: "https://enginev1.hotelkontena.com/api/login",
+                url: window.localStorage.getItem('base_url')+"/login",
                 data: { username: username, password: password, fcmtoken : fcmtoken },
                 success: function(msg){
                     if(msg.status==='success'){

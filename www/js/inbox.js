@@ -21,7 +21,7 @@ function inbox (){
         type: 'GET',
         // make sure you respect the same origin policy with this url:
         // http://en.wikipedia.org/wiki/Same_origin_policy
-        url: "https://enginev1.hotelkontena.com/api/inbox",
+        url: window.localStorage.getItem('base_url')+"/inbox",
         data: { has_approved: 0, org_id: oid },
         beforeSend: function (xhr) {
             /* Authorization header */
@@ -32,7 +32,7 @@ function inbox (){
             if(msg.status==='success'){
                 $(".inbox").remove(); //remove all the tr's except first ,As you are using it as table headers.            
                 if(!msg.data.length){
-                    var html = '<div class="item align-center inbox"><i class="float-center" style="font-size:11px;">tidak pesan masuk</i></div>'
+                    var html = '<div class="item align-center inbox"><i class="float-center" style="font-size:11px;">tidak ada pesan masuk</i></div>'
                     $('#inboxSection').append(html); //append your new tr
                 }
 

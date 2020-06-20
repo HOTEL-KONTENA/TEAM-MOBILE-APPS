@@ -10,12 +10,14 @@ let app = {
     },
     takephoto: function(){
         let opts = {
-            quality: 80,
+            quality: 70,
             destinationType: Camera.DestinationType.DATA_URL,
             sourceType: Camera.PictureSourceType.CAMERA,
             mediaType: Camera.MediaType.PICTURE,
             encodingType: Camera.EncodingType.JPEG,
             cameraDirection: 1,
+            targetWidth: 400,
+            targetHeight: 800,
         };
         
         navigator.camera.getPicture(app.ftw, app.wta, opts);

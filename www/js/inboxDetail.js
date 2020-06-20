@@ -19,7 +19,7 @@ function inboxDetail (){
         type: 'GET',
         // make sure you respect the same origin policy with this url:
         // http://en.wikipedia.org/wiki/Same_origin_policy
-        url: "https://enginev1.hotelkontena.com/api/inbox",
+        url: window.localStorage.getItem('base_url')+"/inbox",
         data: { has_approved: 0, org_id: oid, id: sessionStorage.getItem('session.read') },
         beforeSend: function (xhr) {
             /* Authorization header */
@@ -34,10 +34,10 @@ function inboxDetail (){
                     var d = new Date(this.created_at).getDate();
                     var m = mN[new Date(this.created_at).getMonth()];
                     var Y = new Date(this.created_at).getFullYear();
-                    if(this.approved_by === null){
-                        var html = '<div class="item detail"><p class="text-grey-500 wrap">'+this.title+'</p></div><div class="item detail"><p class="text-grey-500 wrap">'+this.render+'</p></div><div class="item detail center"><button class="left red circle icon ion-close" onClick="declineInbox('+this.id+')"></button><button class="green circle icon ion-checkmark" onClick="approveInbox('+this.id+')"></button></div>';
-                        $('#readSection').append(html); //append your new tr
-                    }
+                    // if(this.approved_at === null){
+                    var html = '<div class="item detail"><p class="text-grey-500 wrap">'+this.title+'</p></div><div class="item detail"><p class="text-grey-500 wrap">'+this.render+'</p></div><div class="item detail center"><button class="left red circle icon ion-close" onClick="declineInbox('+this.id+')"></button><button class="green circle icon ion-checkmark" onClick="approveInbox('+this.id+')"></button></div>';
+                    $('#readSection').append(html); //append your new tr
+                    // }
                 });
             }else{
                 alert(msg.message);
@@ -59,7 +59,7 @@ function declineInbox (id){
             type: 'DELETE',
             // make sure you respect the same origin policy with this url:
             // http://en.wikipedia.org/wiki/Same_origin_policy
-            url: "https://enginev1.hotelkontena.com/api/inbox/decline",
+            url: window.localStorage.getItem('base_url')+"/inbox/decline",
             data: { org_id: oid, id: id },
             beforeSend: function (xhr) {
                 /* Authorization header */
@@ -90,7 +90,7 @@ function approveInbox (id){
             type: 'POST',
             // make sure you respect the same origin policy with this url:
             // http://en.wikipedia.org/wiki/Same_origin_policy
-            url: "https://enginev1.hotelkontena.com/api/inbox/approve",
+            url: window.localStorage.getItem('base_url')+"/inbox/approve",
             data: { org_id: oid, id: id },
             beforeSend: function (xhr) {
                 /* Authorization header */
