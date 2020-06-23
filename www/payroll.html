@@ -53,14 +53,20 @@
           <button class="icon ion-ios-arrow-back" onClick="onBackToDashboard('sdmTab')"></button>
         </div>
         <div class="title">
-           Laporan Kehadiran
+           Slip gaji
         </div>
       </div>
       <div class="content has-header padding">
-        <p id="instruction">Laporan kehadiran bulan ini</p>
-        <div class="list" id="reportedSection">
-          <div class="item align-center history">
-            <i class="float-center" style="font-size:11px;">tidak ada riwayat kehadiran</i>
+        <p id="sentReceipt">Slip gaji sudah dikirim</p>
+        <div class="list" id="sentSection">
+          <div class="item align-center sentReceipt">
+            <i class="float-center" style="font-size:11px;">tidak ada data</i>
+          </div>
+        </div>
+        <p id="closedReceipt">Slip gaji sudah diterima</p>
+        <div class="list" id="closedSection">
+          <div class="item align-center closedReceipt">
+            <i class="float-center" style="font-size:11px;">tidak ada data</i>
           </div>
         </div>
       </div>
@@ -68,6 +74,6 @@
     <script src="cordova.js"></script>
     <script type="text/javascript" src="mobileui/mobileui.js"></script>
     <script type="text/javascript" src="js/global.js"></script>
-    <script type="text/javascript" src="js/reported.js"></script>
+    <script type="text/javascript" src="js/payroll.js"></script>
   </body>
 </html>
