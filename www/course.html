@@ -53,37 +53,32 @@
           <button class="icon ion-ios-arrow-back" onClick="onBackToDashboard('sdmTab')"></button>
         </div>
         <div class="title">
-           Slip gaji
+           Training
         </div>
       </div>
       <div class="content has-header padding">
-        <p id="sentReceipt">Slip gaji sudah dikirim</p>
-        <div class="list white" id="sentSection">
-          <div class="item align-center sentReceipt">
-            <i class="float-center" style="font-size:11px;">tidak ada data</i>
+        <p id="upcomingTraining">Semua training</p>
+        <div class="list white" id="upcomingSection">
+            <div class="item subtab">
+                <div class="row">
+                    <div class="col">
+                        <input type="date" placeholder="yyyy-mm-dd" id="upcomingStart">
+                    </div>
+                    <div class="col">
+                        <label>-</label>
+                    </div>
+                    <div class="col">
+                        <input type="date" placeholder="yyyy-mm-dd" id="upcomingEnd">
+                    </div>
+                </div>
+                <div class="row" style="padding-top:15px;">
+                    <div class="col">
+                        <button class="green radius full  small" onClick="upcoming()">Cari</button>
+                    </div>
+                </div>
+              </div>
           </div>
-        </div>
-        <p id="closedReceipt">Slip gaji sudah diterima</p>
-        <div class="list white" id="closedSection">
-          <div class="item subtab">
-            <div class="row">
-                <div class="col">
-                    <input type="date" placeholder="yyyy-mm-dd" id="closedStart">
-                </div>
-                <div class="col">
-                    <label>-</label>
-                </div>
-                <div class="col">
-                    <input type="date" placeholder="yyyy-mm-dd" id="closedEnd">
-                </div>
-            </div>
-            <div class="row" style="padding-top:15px;">
-                <div class="col">
-                    <button class="green radius full  small" onClick="closed()">Cari</button>
-                </div>
-            </div>
-          </div>
-          <div class="item align-center closedReceipt">
+          <div class="item align-center upcomingTraining">
             <i class="float-center" style="font-size:11px;">tidak ada data</i>
           </div>
         </div>
@@ -92,6 +87,6 @@
     <script src="cordova.js"></script>
     <script type="text/javascript" src="mobileui/mobileui.js"></script>
     <script type="text/javascript" src="js/global.js"></script>
-    <script type="text/javascript" src="js/payroll.js"></script>
+    <script type="text/javascript" src="js/course.js"></script>
   </body>
 </html>

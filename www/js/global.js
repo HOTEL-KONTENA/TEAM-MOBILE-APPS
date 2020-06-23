@@ -28,3 +28,7 @@ function onDeviceReadyFCM(){
 function onBackToDashboard(hash){
     window.location.href = "dashboard.html#"+hash;
 }
+
+function money(n) {
+    return n.toLocaleString('en-US', {minimumFractionDigits: 0});
+}

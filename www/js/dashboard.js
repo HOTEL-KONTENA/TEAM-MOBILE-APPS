@@ -101,6 +101,14 @@ function onPayroll(){
     window.location.href = "payroll.html";
 }
 
+function onCourse(){
+    window.location.href = "course.html";
+}
+
+function onArchive(){
+    window.location.href = "archive.html";
+}
+
 function onInbox(){
     window.location.href = "inbox.html";
 }
