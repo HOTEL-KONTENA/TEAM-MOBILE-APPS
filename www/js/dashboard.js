@@ -93,6 +93,14 @@ function onReported(){
     window.location.href = "reported.html";
 }
 
+function onWorkleave(){
+    window.location.href = "workleave.html";
+}
+
+function onPayroll(){
+    window.location.href = "payroll.html";
+}
+
 function onInbox(){
     window.location.href = "inbox.html";
 }

@@ -8,8 +8,8 @@ screen.orientation.lock('portrait-primary').then(function success() {
 function onLogin(){
     const username = $('#loginPhone').val();
     const password = $('#loginPassword').val();
-    if (typeof FCMPlugin != 'undefined') {
-        FCMPlugin.getToken(function (fcmtoken) {
+    // if (typeof FCMPlugin != 'undefined') {
+    //     FCMPlugin.getToken(function (fcmtoken) {
             $.ajax({
                 crossDomain: true,
                 type: 'POST',
@@ -17,7 +17,8 @@ function onLogin(){
                 // make sure you respect the same origin policy with this url:
                 // http://en.wikipedia.org/wiki/Same_origin_policy
                 url: window.localStorage.getItem('base_url')+"/login",
-                data: { username: username, password: password, fcmtoken : fcmtoken },
+                // data: { username: username, password: password, fcmtoken : fcmtoken },
+                data: { username: username, password: password },
                 success: function(msg){
                     if(msg.status==='success'){
                         sessionStorage.setItem('user.id', msg.data.user.id);
@@ -33,8 +34,8 @@ function onLogin(){
                     }
                 }
             });
-        });
-    }
+    //     });
+    // }
 }
 
 function onForget(){
