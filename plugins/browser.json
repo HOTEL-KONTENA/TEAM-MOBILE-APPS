@@ -1,0 +1,37 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "id.thunderlab.kontenaTeam"
+    },
+    "cordova-plugin-fcm-with-dependecy-updated": {
+      "PACKAGE_NAME": "id.thunderlab.kontenaTeam"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "id.thunderlab.kontenaTeam"
+    },
+    "cordova-plugin-mock-gps-checker": {
+      "PACKAGE_NAME": "id.thunderlab.kontenaTeam"
+    },
+    "cordova-plugin-screen-orientation": {
+      "PACKAGE_NAME": "id.thunderlab.kontenaTeam"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "id.thunderlab.kontenaTeam"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-compat": {
+      "PACKAGE_NAME": "id.thunderlab.kontenaTeam"
+    },
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "id.thunderlab.kontenaTeam"
+    }
+  }
+}

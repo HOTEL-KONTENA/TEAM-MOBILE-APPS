@@ -50,38 +50,85 @@
     <body>
       <div class="header green">
         <div class="left">
-          <button class="icon ion-ios-arrow-back" onClick="onBackToDashboard('sdmTab')"></button>
+          <button class="icon ion-ios-arrow-back" onClick="onBackToWleave()"></button>
         </div>
         <div class="title">
-           Cuti
+           Ajukan Cuti
         </div>
       </div>
 
       <div class="content has-header padding">
-        <p>Quota Cuti</p>
-        <div class="list">
-          <div class="item align-center">
-            <p class="align-center" style="font-size: 40px; text-decoration: bold" id="quotaWleave">0</p>
-            <div class="clearfix">&nbsp;</div>
-            <button class="green radius full" onClick="onNewWleave()">Ajukan Cuti</button>
+          <p id="instruction">Harap isikan data berikut</p>
+          <div class="list white">
+            <div class="item">
+              <label>Category</label>
+              <select id="component" name="category"></select>
+            </div>
+            <div class="item">
+              <label>Description</label>
+              <textarea name="" id="description" cols="30" rows="3" style="resize: none;"></textarea>
+            </div>
+            <div class="item">
+              <label>Number of Days</label>
+              <input type="number" id="amount">
+            </div>
+            <div class="item">
+              <label>Start Day</label>
+              <input type="date" placeholder="yyyy-mm-dd" id="start">
+            </div>
+            <div class="item">
+              <label>End Day</label>
+              <input type="date" placeholder="yyyy-mm-dd" id="end">
+            </div>
+            <div class="item">
+                <button class="green radius full" onClick="addLine()">Add</button>
+              </div>
           </div>
         </div>
-
-        <p id="document">Pengajuan Cuti</p>
-        <div class="list" id="documentWleave">
-          <div class="item align-center document">
-            <i class="float-center" style="font-size:11px;">tidak ada riwayat pengajuan</i>
-          </div>
-        </div>
-      </div>
     
     <script src="cordova.js"></script>
     <script type="text/javascript" src="mobileui/mobileui.js"></script>
     <script type="text/javascript" src="js/global.js"></script>
     <script type="text/javascript" src="js/wleave.js"></script>
     <script type="text/javascript">
+      const comp = null
+
       $(function() {
-        this.quota()
+        this.wleavecomponent();
+      })
+
+      $('#start').on('change', function() {
+        const tmpAmount = $('#amount').val();
+        const startDate = new Date($(this).val());
+        const endDate = new Date($(this).val());
+        endDate.setDate(endDate.getDate() + parseInt(tmpAmount));
+
+        const d = endDate.getDate()
+        const m = ((endDate.getMonth() + 1) < 10 ? '0' : '') + (endDate.getMonth() + 1)
+        const y = endDate.getFullYear()
+
+        console.log('check amount', tmpAmount);
+        console.log('check start date', startDate);
+        console.log('check end date', endDate);
+        console.log('check end get date', endDate.getDate());
+        console.log('get month', endDate.getMonth())
+        console.log('get year', endDate.getFullYear())
+
+        $('#end').val(y + '-' + m + '-' + d);
+      })
+
+      $('#component').change(function() {
+        // var optSelected = $('option:selected', this)
+        // console.log('check optsel', optSelected);
+        console.log('check this', this)
+        console.log('option', this.options);
+        console.log('index', this.selectedIndex);
+        console.log('option selected', this.options[this.selectedIndex])
+        this.component = this.options[this.selectedIndex]
+        component = this.options[this.selectedIndex]
+        // comp = this.options[this.selectedIndex]
+
+        // console.log('check com', comp)
       })
     </script>
   </body>
