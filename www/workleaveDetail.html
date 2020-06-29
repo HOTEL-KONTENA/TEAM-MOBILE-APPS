@@ -53,30 +53,25 @@
           <button class="icon ion-ios-arrow-back" onClick="onBackToDashboard('sdmTab')"></button>
         </div>
         <div class="title">
-           Cuti
+           Detail Cuti
         </div>
       </div>
 
       <div class="content has-header padding">
-        <p>Quota Cuti</p>
-        <div class="list">
-          <div class="item align-center">
-            <p class="align-center" style="font-size: 40px; text-decoration: bold" id="quotaWleave">0</p>
-            <div class="clearfix">&nbsp;</div>
-            <button class="green radius full" onClick="onNewWleave()">Ajukan Cuti</button>
-          </div>
-        </div>
-
-        <p id="document">Pengajuan Cuti</p>
-        <div class="list white" id="documentWleave">
-          <div class="item align-center document">
-            <i class="float-center" style="font-size:11px;">tidak ada riwayat pengajuan</i>
+        <div class="list white" id="documentDetailWleave" style="margin-top: 20px;">
+          <div class="item document">
+            <h4 id="document-title"></h4>
+            <div class="row">
+              <div class="col-50">
+                <p id="document-status"></p>
+              </div>
+              <div class="col-50 ">
+                <p id="document-date text-grey"></p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="hidden" id="template-detail-document">
-      </div>  
     
     <script src="cordova.js"></script>
     <script type="text/javascript" src="mobileui/mobileui.js"></script>
@@ -85,8 +80,7 @@
     <script type="text/javascript" src="js/wleave.js"></script>
     <script type="text/javascript">
       $(function() {
-        this.quota()
-        this.wleave()
+        this.wleaveDocument()
       })
     </script>
   </body>

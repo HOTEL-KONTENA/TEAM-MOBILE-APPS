@@ -10,7 +10,7 @@
  
  $(function() {
     // this.quota()
-    this.wleave()
+    // this.wleave()
 });
 
 
@@ -44,49 +44,74 @@ function quota (){
     });
 }
 
-function wleave (){
+function wleave() {
     const mN = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
-    "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"
-];
+                "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"];
 
-oid = 0
-let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
-for (let i in ps) {
-    oid = ps[i].org_id
+    oid = 0
+    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
+    for (let i in ps) {
+        oid = ps[i].org_id
+    }
+
+    $.ajax({
+        crossDomain: true,
+        type: 'GET',
+        // make sure you respect the same origin policy with this url:
+        // http://en.wikipedia.org/wiki/Same_origin_policy
+        url: window.localStorage.getItem('base_url')+"/hr/workleave",
+        data: { start: 'first day of this month', end: 'today', org_id : oid },
+        beforeSend: function (xhr) {
+            /* Authorization header */
+            xhr.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem('user.jwt'));
+            // xhr.setRequestHeader("X-Mobile", "false");
+        },
+        success: function(msg){
+            if(msg.status==='success'){
+                $(".document").remove(); //remove all the tr's except first ,As you are using it as table headers.            
+                if(!msg.data.data.length){
+                    var html = '<div class="item align-center document"><i class="float-center" style="font-size:11px;">tidak ada riwayat pengajuan</i></div>'
+                    $('#documentWleave').append(html); //append your new tr
+                }
+
+                sessionStorage.setItem('workleave', JSON.stringify(msg.data.data))
+                
+                $(msg.data.data).each(function(index, item) {
+                    var date = moment(item.submitted_at, 'YYYY-MM-DD').isValid() ? moment(item.submitted_at).format('DD-MM-YYYY') : '-'
+                    var html = '<div class="item document item-document" data-id="'+ item.id +'" onClick="selectedWleaveDocument(this)"><div class="row"><div class="col-25"><p class="align-center">'+ date +'</p></div><div class="col"><p class="text-grey-500 wrap"><strong>'+ item.title +'</strong><br/>'+item.status+'</p></div></div></div>';
+                    $('#documentWleave').append(html); //append your new tr
+                });
+            }else{
+                alert(msg.message);
+            }
+        }
+    });
 }
 
-$.ajax({
-    crossDomain: true,
-    type: 'GET',
-    // make sure you respect the same origin policy with this url:
-    // http://en.wikipedia.org/wiki/Same_origin_policy
-    url: window.localStorage.getItem('base_url')+"/hr/workleave",
-    data: { start: 'first day of this month', end: 'today', org_id : oid },
-    beforeSend: function (xhr) {
-        /* Authorization header */
-        xhr.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem('user.jwt'));
-        // xhr.setRequestHeader("X-Mobile", "false");
-    },
-    success: function(msg){
-        if(msg.status==='success'){
-            $(".document").remove(); //remove all the tr's except first ,As you are using it as table headers.            
-            if(!msg.data.data.length){
-                var html = '<div class="item align-center document"><i class="float-center" style="font-size:11px;">tidak ada riwayat pengajuan</i></div>'
-                $('#documentWleave').append(html); //append your new tr
-            }
-            
-            $(msg.data.data).each(function () {
-                var d = new Date(this.date).getDate();
-                var m = mN[new Date(this.date).getMonth()];
-                var Y = new Date(this.date).getFullYear();
-                var html = '<div class="item document"><div class="row"><div class="col-25"><p class="align-center">'+d+' '+m+' '+Y+'</p></div><div class="col"><p class="text-grey-500 wrap"><strong>'+this.at+'</strong><br/>'+this.status+'</p></div></div></div>';
-                $('#documentWleave').append(html); //append your new tr
-            });
-        }else{
-            alert(msg.message);
-        }
-    }
-});
+function selectedWleaveDocument(elem) {
+    var dataId = $(elem).attr('data-id')
+    sessionStorage.setItem('document-workleave-id', dataId)
+    window.location.href = "workleaveDetail.html";
+}
+
+function wleaveDocument() {
+    console.log("check ", sessionStorage.getItem('document-workleave-id'))
+    console.log("check ", JSON.parse(sessionStorage.getItem('workleave')))
+    // console.log("check ", $(elem).attr('data-id'))
+
+    var getId = parseInt(sessionStorage.getItem('document-workleave-id'));
+    var getData = JSON.parse(sessionStorage.getItem('workleave'));
+    var selected = getData.find(dt => { return dt.id === getId });
+
+    console.log('get data', getData)
+    console.log('selected', selected)
+
+    var content = $('#documentDetailWleave');
+
+    $('#document-title').html(selected.title)
+    $('#document-date').html(selected.submitted_at)
+    $('#document-status').html(selected.status)
+
 }
 
 function wleavecomponent() {
@@ -116,8 +141,6 @@ function wleavecomponent() {
             console.log('check', msg)
             if(msg.status==='success'){
                 $(msg.data.data).each(function(index, item) {
-                    console.log('check index', index);
-                    console.log('check item', item);
                     var option = $('<option value="' + item.id + '" data-name="'+ item.title +'">'+ item.title + '</option>');
                     // var html = '<option value="' + item.id + '" data-item="'+ JSON.stringify(item) +'">'+ item.title + '</option>'
                     $('#componentLine').append(option);
