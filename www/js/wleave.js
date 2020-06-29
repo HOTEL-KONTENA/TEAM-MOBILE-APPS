@@ -144,6 +144,7 @@ function wleaveDocument() {
     $('#document-date').html(date)
     $('#document-status').html(selected.status)
     $('#document-edit').attr('data-id', selected.id)
+    $('#document-delete').attr('data-id', selected.id)
 
     selected.lines.forEach(function(item, index) {
         console.log('check indx', index)
@@ -154,6 +155,7 @@ function wleaveDocument() {
 
     if(selected.status !== 'DRAFT') {
         $('#document-edit').hide()
+        $('#document-delete').hide()
     }
 }
 
@@ -272,10 +274,75 @@ function save() {
         // http://en.wikipedia.org/wiki/Same_origin_policy
         url: window.localStorage.getItem('base_url')+"/hr/workleave",
         data: { 
-            id: form.id,
             title: form.title, 
             lines: form.lines,
             org_id : oid 
+        },
+        beforeSend: function (xhr) {
+            /* Authorization header */
+            xhr.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem('user.jwt'));
+            // xhr.setRequestHeader("X-Mobile", "false");
+        },
+        success: function(msg){
+            if(msg.status==='success'){
+                window.location.href = "workleave.html";
+            }else{
+                alert(msg.message);
+            }
+        }
+    });
+}
+
+function update(elem) {
+    var dataId = $(elem).attr('data-id')
+    sessionStorage.setItem('document-workleave-id', dataId)
+
+    oid = 0
+    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
+    for (let i in ps) {
+        oid = ps[i].org_id
+    }
+
+    $.ajax({
+        crossDomain: true,
+        type: 'PATCH',
+        // make sure you respect the same origin policy with this url:
+        // http://en.wikipedia.org/wiki/Same_origin_policy
+        url: window.localStorage.getItem('base_url')+"/hr/workleave/" + dataId,
+        data: { org_id : oid },
+        beforeSend: function (xhr) {
+            /* Authorization header */
+            xhr.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem('user.jwt'));
+            // xhr.setRequestHeader("X-Mobile", "false");
+        },
+        success: function(msg){
+            if(msg.status==='success'){
+                window.location.href = "workleave.html";
+            }else{
+                alert(msg.message);
+            }
+        }
+    });
+}
+
+function deleted(elem) {
+    var dataId = $(elem).attr('data-id')
+    sessionStorage.setItem('document-workleave-id', dataId)
+
+    oid = 0
+    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
+    for (let i in ps) {
+        oid = ps[i].org_id
+    }
+
+    $.ajax({
+        crossDomain: true,
+        type: 'DELETE',
+        // make sure you respect the same origin policy with this url:
+        // http://en.wikipedia.org/wiki/Same_origin_policy
+        url: window.localStorage.getItem('base_url')+"/hr/workleave/" + dataId,
+        data: {
+            org_id : oid   
         },
         beforeSend: function (xhr) {
             /* Authorization header */
@@ -311,12 +378,6 @@ function wleaveTemplate() {
 // DEFINED LINKS
 function onNewWleave(){
     sessionStorage.removeItem('document-workleave-id')
-    window.location.href = "wleaveForm.html";
-}
-
-function onEditWleave(elem) {
-    var dataId = $(elem).attr('data-id')
-    sessionStorage.setItem('document-workleave-id', dataId)
     window.location.href = "wleaveForm.html";
 }
 

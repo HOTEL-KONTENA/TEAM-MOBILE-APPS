@@ -50,7 +50,7 @@
     <body>
       <div class="header green">
         <div class="left">
-          <button class="icon ion-ios-arrow-back" onClick="onBackToDashboard('sdmTab')"></button>
+          <button class="icon ion-ios-arrow-back" onClick="onBackToWleave()"></button>
         </div>
         <div class="title">
            Detail Cuti
@@ -74,7 +74,8 @@
             <div id="document-lines"></div>
           </div>
         </div>
-        <button id="document-edit" class="green radius full" onClick="onEditWleave(this)" data-id="" style="margin-top: 20px;">Edit</button>
+        <button id="document-edit" class="green radius full" onClick="update(this)" data-id="" style="margin-top: 20px;">Kirim ke Dept Head</button>
+        <button id="document-delete" class="red radius full" onClick="deleted(this)" data-id="" style="margin-top: 20px;">Hapus</button>
       </div>
     
     <script src="cordova.js"></script>
