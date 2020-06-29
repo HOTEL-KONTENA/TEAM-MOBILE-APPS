@@ -147,8 +147,6 @@ function onChangeAmount(elem) {
     const tmpParent = $(elem).parents('.template');
     const startLine = $(tmpParent).find('.startLine');
 
-    startLine.removeAttr('disabled')
-
     if (startLine.val() !== '') {
       onChangeStart($(tmpParent).find('.startLine'));
     }
