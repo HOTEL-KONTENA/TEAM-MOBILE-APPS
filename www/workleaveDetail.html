@@ -66,17 +66,21 @@
                 <p id="document-status"></p>
               </div>
               <div class="col-50 ">
-                <p id="document-date text-grey"></p>
+                <p id="document-date" class="text-grey align-right"></p>
               </div>
             </div>
           </div>
+          <div class="item document">
+            <div id="document-lines"></div>
+          </div>
         </div>
+        <button id="document-edit" class="green radius full" onClick="onEditWleave(this)" data-id="" style="margin-top: 20px;">Edit</button>
       </div>
     
     <script src="cordova.js"></script>
     <script type="text/javascript" src="mobileui/mobileui.js"></script>
-    <script type="text/javascript" src="js/moment.js"></script>
     <script type="text/javascript" src="js/global.js"></script>
+    <script type="text/javascript" src="js/moment.js"></script>
     <script type="text/javascript" src="js/wleave.js"></script>
     <script type="text/javascript">
       $(function() {

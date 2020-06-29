@@ -94,6 +94,37 @@ function selectedWleaveDocument(elem) {
     window.location.href = "workleaveDetail.html";
 }
 
+function setFormWleave() {
+    var getId = parseInt(sessionStorage.getItem('document-workleave-id'));
+    console.log('check get id', getId)
+    if (getId) {
+        var getData = JSON.parse(sessionStorage.getItem('workleave'));
+        var selected = getData.find(dt => { return dt.id === getId });
+
+        $('#formId').val(selected.id)
+        $('#titleId').val(selected.title)
+
+        if(selected.lines.length !== 0) {
+            selected.lines.forEach(function(item, index) {
+                console.log('check indx', index)
+                console.log('check item', item)
+
+                var tmp = $('#template-alert-custom');
+                var section = $('#workleaveLine');
+                var clone = tmp.clone().removeClass('hidden').addClass('white template').css('margin-top', '20px').css('margin-bottom', '20px;').removeAttr('id');
+                clone.find('#componentLine').val(parseInt(item.component_id))
+                clone.find('#descriptionLine').val(item.description)
+                clone.find('#amountLine').val(item.amount)
+                clone.find('#startLine').val(item.started_at)
+                clone.find('#endLine').val(item.ended_at)
+
+                section.append(clone)
+            })
+            
+        }
+    }
+}
+
 function wleaveDocument() {
     console.log("check ", sessionStorage.getItem('document-workleave-id'))
     console.log("check ", JSON.parse(sessionStorage.getItem('workleave')))
@@ -108,10 +139,22 @@ function wleaveDocument() {
 
     var content = $('#documentDetailWleave');
 
+    var date = moment(selected.submitted_at, 'YYYY-MM-DD').isValid() ? moment(selected.submitted_at).format('DD-MM-YYYY') : '-'
     $('#document-title').html(selected.title)
-    $('#document-date').html(selected.submitted_at)
+    $('#document-date').html(date)
     $('#document-status').html(selected.status)
+    $('#document-edit').attr('data-id', selected.id)
 
+    selected.lines.forEach(function(item, index) {
+        console.log('check indx', index)
+        console.log('check item', item)
+        var itemList = '<div class="row" style="margin-bottom:10px;"><div class="col"><p>'+ (index+1) + ' ' + item.description + '&nbsp; ' + item.amount +' Hari Dimulai dari tanggal '+ moment(item.started_at, 'YYYY-MM-DD').format('DD-MM-YYYY') +' sampai dengan tanggal '+ moment(item.ended_at, 'YYYY-MM-DD').format('DD-MM-YYYY') +'</p></div></div>'
+        $('#document-lines').append(itemList)
+    })
+
+    if(selected.status !== 'DRAFT') {
+        $('#document-edit').hide()
+    }
 }
 
 function wleavecomponent() {
@@ -143,7 +186,7 @@ function wleavecomponent() {
                 $(msg.data.data).each(function(index, item) {
                     var option = $('<option value="' + item.id + '" data-name="'+ item.title +'">'+ item.title + '</option>');
                     // var html = '<option value="' + item.id + '" data-item="'+ JSON.stringify(item) +'">'+ item.title + '</option>'
-                    $('#componentLine').append(option);
+                    $('.componentLine').append(option);
                 })
                 // $('#category').
                 // $(".document").remove(); //remove all the tr's except first ,As you are using it as table headers.            
@@ -200,6 +243,7 @@ function save() {
     var tmp = $('#workleaveLine');
     lines = []
     tmp.children('.template').each(function(index, item) {
+        const id = $('#formId').val()
         const title = $('#titleId').val()
         const desc = $(item).find('.descriptionLine').val();
         const amount = $(item).find('.amountLine').val();
@@ -216,7 +260,7 @@ function save() {
             component_id: component.val(),
             component_title: componentOption.attr('data-name')
         })
-
+        form.id = id
         form.title = title
         form.lines = lines
     })
@@ -228,6 +272,7 @@ function save() {
         // http://en.wikipedia.org/wiki/Same_origin_policy
         url: window.localStorage.getItem('base_url')+"/hr/workleave",
         data: { 
+            id: form.id,
             title: form.title, 
             lines: form.lines,
             org_id : oid 
@@ -245,68 +290,6 @@ function save() {
             }
         }
     });
-}
-
-// function addLine() {
-//     console.log('check selected', $('#template-alert-custom'));
-//     console.log('check description', descriptionLine);
-//     console.log('check amount', amountLine);
-
-    
-//     const desc = $('#descriptionLine').val();
-//     const amount = $('#amountLine').val();
-//     const start = $('#startLine').val();
-//     const end = $('#endLine').val();
-//     const tmpComponent = $('#componentLine');
-//     const component = $(tmpComponent.children('option')[tmpComponent[0].selectedIndex])
-//     console.log('check select', $('#descriptionLine'));
-//     console.log('check val', tmpComponent.val());
-//     console.log('check option', tmpComponent.children('option')[tmpComponent[0].selectedIndex]);
-//     console.log('check option', tmpComponent.children('option').find('selected'));
-//     console.log('check selected', $(tmpComponent.children('option')[tmpComponent[0].selectedIndex]))
-//     lines.push({
-//         desc: desc,
-//         started_at: start,
-//         ended_at: end,
-//         amount: amount,
-//         component_id: tmpComponent.val(),
-//         component_title: component.attr('data-name')
-//     })
-//     console.log('ceechk', lines)
-    
-//     console.log('check component', this.component)
-//     console.log('check component', component.attr('data-name'))
-// }
-
-function test(param) {
-    console.log('check param', param)
-    alert({
-        title: 'Ajukan Cuti',
-        message: 'Harap isikan data berikut',
-        template: 'template-alert-custom',
-        width: '90%',
-        inputs: [
-            {
-                label: 'Test'
-            }
-        ],
-        buttons:[
-            {
-                label: 'Finish',
-                onclick: function() {
-                    console.log('check this', this)
-                    addLine();
-                    // closeAlert();
-                }
-            },
-            {
-                label:'Cancel',
-                onclick: function() {
-                    closeAlert();
-                }
-            }
-        ]
-    })
 }
 
 function loadLine() {
@@ -327,6 +310,13 @@ function wleaveTemplate() {
 
 // DEFINED LINKS
 function onNewWleave(){
+    sessionStorage.removeItem('document-workleave-id')
+    window.location.href = "wleaveForm.html";
+}
+
+function onEditWleave(elem) {
+    var dataId = $(elem).attr('data-id')
+    sessionStorage.setItem('document-workleave-id', dataId)
     window.location.href = "wleaveForm.html";
 }
 
