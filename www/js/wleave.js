@@ -29,7 +29,7 @@ function quota (){
         // make sure you respect the same origin policy with this url:
         // http://en.wikipedia.org/wiki/Same_origin_policy
         url: window.localStorage.getItem('base_url')+"/hr/quota",
-        data: { start: st, end: 'now', org_id : oid , tag: 'CUTI' },
+        data: { start: st, end: 'now', org_id : oid , tag: 'AL' },
         beforeSend: function (xhr) {
             /* Authorization header */
             xhr.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem('user.jwt'));
