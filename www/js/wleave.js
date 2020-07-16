@@ -16,9 +16,11 @@
 
 function quota (){
     oid = 0
+    st  = '2019-12-16 00:00:00'
     let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
     for (let i in ps) {
         oid = ps[i].org_id
+        //st  = ps[i].created_at
     }
     
     $.ajax({
@@ -27,7 +29,7 @@ function quota (){
         // make sure you respect the same origin policy with this url:
         // http://en.wikipedia.org/wiki/Same_origin_policy
         url: window.localStorage.getItem('base_url')+"/hr/quota",
-        data: { start: 'first day of this month', end: 'today', org_id : oid },
+        data: { start: st, end: 'now', org_id : oid , tag: 'CUTI' },
         beforeSend: function (xhr) {
             /* Authorization header */
             xhr.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem('user.jwt'));
@@ -35,8 +37,71 @@ function quota (){
         },
         success: function(msg){
             if(msg.status==='success'){
-                console.log('check', $('#quotaWleave'))
                 $('#quotaWleave').html(msg.data); //append your new stat
+            }else{
+                alert(msg.message);
+            }
+        }
+    });
+}
+
+
+function quotaPH (){
+    oid = 0
+    st  = '2019-12-16 00:00:00'
+    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
+    for (let i in ps) {
+        oid = ps[i].org_id
+        //st  = ps[i].created_at
+    }
+    
+    $.ajax({
+        crossDomain: true,
+        type: 'GET',
+        // make sure you respect the same origin policy with this url:
+        // http://en.wikipedia.org/wiki/Same_origin_policy
+        url: window.localStorage.getItem('base_url')+"/hr/quota",
+        data: { start: st, end: 'now', org_id : oid , tag: 'PH' },
+        beforeSend: function (xhr) {
+            /* Authorization header */
+            xhr.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem('user.jwt'));
+            // xhr.setRequestHeader("X-Mobile", "false");
+        },
+        success: function(msg){
+            if(msg.status==='success'){
+                $('#quotaPH').html(msg.data); //append your new stat
+            }else{
+                alert(msg.message);
+            }
+        }
+    });
+}
+
+
+function quotaEO (){
+    oid = 0
+    st  = '2019-12-16 00:00:00'
+    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
+    for (let i in ps) {
+        oid = ps[i].org_id
+        //st  = ps[i].created_at
+    }
+    
+    $.ajax({
+        crossDomain: true,
+        type: 'GET',
+        // make sure you respect the same origin policy with this url:
+        // http://en.wikipedia.org/wiki/Same_origin_policy
+        url: window.localStorage.getItem('base_url')+"/hr/quota",
+        data: { start: st, end: 'now', org_id : oid , tag: 'EO' },
+        beforeSend: function (xhr) {
+            /* Authorization header */
+            xhr.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem('user.jwt'));
+            // xhr.setRequestHeader("X-Mobile", "false");
+        },
+        success: function(msg){
+            if(msg.status==='success'){
+                $('#quotaEO').html(msg.data); //append your new stat
             }else{
                 alert(msg.message);
             }
@@ -96,7 +161,6 @@ function selectedWleaveDocument(elem) {
 
 function setFormWleave() {
     var getId = parseInt(sessionStorage.getItem('document-workleave-id'));
-    console.log('check get id', getId)
     if (getId) {
         var getData = JSON.parse(sessionStorage.getItem('workleave'));
         var selected = getData.find(dt => { return dt.id === getId });
@@ -106,8 +170,6 @@ function setFormWleave() {
 
         if(selected.lines.length !== 0) {
             selected.lines.forEach(function(item, index) {
-                console.log('check indx', index)
-                console.log('check item', item)
 
                 var tmp = $('#template-alert-custom');
                 var section = $('#workleaveLine');
@@ -126,16 +188,11 @@ function setFormWleave() {
 }
 
 function wleaveDocument() {
-    console.log("check ", sessionStorage.getItem('document-workleave-id'))
-    console.log("check ", JSON.parse(sessionStorage.getItem('workleave')))
-    // console.log("check ", $(elem).attr('data-id'))
 
     var getId = parseInt(sessionStorage.getItem('document-workleave-id'));
     var getData = JSON.parse(sessionStorage.getItem('workleave'));
     var selected = getData.find(dt => { return dt.id === getId });
 
-    console.log('get data', getData)
-    console.log('selected', selected)
 
     var content = $('#documentDetailWleave');
 
@@ -147,8 +204,6 @@ function wleaveDocument() {
     $('#document-delete').attr('data-id', selected.id)
 
     selected.lines.forEach(function(item, index) {
-        console.log('check indx', index)
-        console.log('check item', item)
         var itemList = '<div class="row" style="margin-bottom:10px;"><div class="col"><p>'+ (index+1) + ' ' + item.description + '&nbsp; ' + item.amount +' Hari Dimulai dari tanggal '+ moment(item.started_at, 'YYYY-MM-DD').format('DD-MM-YYYY') +' sampai dengan tanggal '+ moment(item.ended_at, 'YYYY-MM-DD').format('DD-MM-YYYY') +'</p></div></div>'
         $('#document-lines').append(itemList)
     })
@@ -183,7 +238,6 @@ function wleavecomponent() {
             // xhr.setRequestHeader("X-Mobile", "false");
         },
         success: function(msg){
-            console.log('check', msg)
             if(msg.status==='success'){
                 $(msg.data.data).each(function(index, item) {
                     var option = $('<option value="' + item.id + '" data-name="'+ item.title +'">'+ item.title + '</option>');
@@ -360,10 +414,7 @@ function deleted(elem) {
 }
 
 function loadLine() {
-    console.log('check lines', lines);
     lines.forEach(function(item, index) {
-        console.log('chekc item', item)
-        console.log('chekc index', index)
     })
 }
 

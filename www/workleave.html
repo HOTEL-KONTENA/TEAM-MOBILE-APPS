@@ -53,21 +53,34 @@
           <button class="icon ion-ios-arrow-back" onClick="onBackToDashboard('sdmTab')"></button>
         </div>
         <div class="title">
-           Cuti
+           Libur
         </div>
       </div>
 
       <div class="content has-header padding">
-        <p>Quota Cuti</p>
+        <p>Quota Libur</p>
         <div class="list">
+          <div class="row align-center">
+            <div class="col padding white">
+              <h1 class="text-big text-strong" id="quotaWleave">0</h1>
+              <p>Cuti</p>
+            </div>
+            <div class="col padding white">
+              <h1 class="text-big text-strong" id="quotaPH">0</h1>
+              <p>PH</p>
+            </div>
+            <div class="col padding white">
+              <h1 class="text-big text-strong" id="quotaEO">0</h1>
+              <p>EO</p>
+            </div>
+          </div>
+          <div class="clearfix">&nbsp;</div>
           <div class="item align-center">
-            <p class="align-center" style="font-size: 40px; text-decoration: bold" id="quotaWleave">0</p>
-            <div class="clearfix">&nbsp;</div>
-            <button class="green radius full" onClick="onNewWleave()">Ajukan Cuti</button>
+            <button class="green radius full" onClick="onNewWleave()">Ajukan Libur</button>
           </div>
         </div>
 
-        <p id="document">Pengajuan Cuti</p>
+        <p id="document">Pengajuan Libur</p>
         <div class="list white" id="documentWleave">
           <div class="item align-center document">
             <i class="float-center" style="font-size:11px;">tidak ada riwayat pengajuan</i>
@@ -86,6 +99,8 @@
     <script type="text/javascript">
       $(document).ready(function() {
         this.quota()
+        this.quotaPH()
+        this.quotaEO()
         this.wleave()
       })
     </script>
