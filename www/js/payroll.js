@@ -46,11 +46,13 @@ function sent (){
                     $('#sentSection').append(html); //append your new tr
                 }
 
-                $(msg.data.data).each(function () {
-                    var d = new Date(this.submitted_at).getDate();
-                    var m = mN[new Date(this.submitted_at).getMonth()];
-                    var Y = new Date(this.submitted_at).getFullYear();
-                    var html = '<div class="item sentReceipt"><div class="row"><div class="col"><p class="align-center">'+this.title+'</p><p class="align-center" style="font-size:18px;padding:5px;"><strong>'+money(this.total)+'</strong></p></div></div><div class="row"><div class="col"><p class="align-center">Dikirim tanggal<br/>'+d+' '+m+' '+Y+'</p></div><div class="col"><button class="green radius full  small" onClick="onClosed('+this.id+')">Diterima</button></div></div></div>';
+                sessionStorage.setItem('payroll', JSON.stringify(msg.data.data))
+
+                $(msg.data.data).each(function (index, item) {
+                    var d = new Date(item.submitted_at).getDate();
+                    var m = mN[new Date(item.submitted_at).getMonth()];
+                    var Y = new Date(item.submitted_at).getFullYear();
+                    var html = '<div class="item sentReceipt" data-id="'+ item.id +'" data-type="sent"><div class="row"><div class="col"><p class="align-center">'+item.title+'</p><p class="align-center" style="font-size:18px;padding:5px;"><strong>'+money(item.total)+'</strong></p></div></div><div class="row"><div class="col"><p class="align-center">Dikirim tanggal<br/>'+d+' '+m+' '+Y+'</p></div><div class="col"><button class="green radius full  small" onClick="onClosed('+item.id+')">Diterima</button></div></div></div>';
                     $('#sentSection').append(html); //append your new tr
                 });
             }else{
@@ -93,16 +95,18 @@ function closed (){
                     $('#closedSection').append(html); //append your new tr
                 }
 
-                $(msg.data.data).each(function () {
-                    var d = new Date(this.submitted_at).getDate();
-                    var m = mN[new Date(this.submitted_at).getMonth()];
-                    var Y = new Date(this.submitted_at).getFullYear();
+                sessionStorage.setItem('payrollClosed', JSON.stringify(msg.data.data))
 
-                    var d2 = new Date(this.closed_at).getDate();
-                    var m2 = mN[new Date(this.closed_at).getMonth()];
-                    var Y2 = new Date(this.closed_at).getFullYear();
+                $(msg.data.data).each(function (index, item) {
+                    var d = new Date(item.submitted_at).getDate();
+                    var m = mN[new Date(item.submitted_at).getMonth()];
+                    var Y = new Date(item.submitted_at).getFullYear();
 
-                    var html = '<div class="item closedReceipt"><div class="row"><div class="col"><p class="align-center">'+this.title+'</p><p class="align-center" style="font-size:18px;padding:5px;"><strong>'+money(this.total)+'</strong></p></div></div><div class="row"><div class="col"><p class="align-center">Dikirim tanggal<br/>'+d+' '+m+' '+Y+'</p></div><div class="col"><p class="align-center">Diterima tanggal <br/>'+d2+' '+m2+' '+Y2+'</p></div></div></div>';
+                    var d2 = new Date(item.closed_at).getDate();
+                    var m2 = mN[new Date(item.closed_at).getMonth()];
+                    var Y2 = new Date(item.closed_at).getFullYear();
+
+                    var html = '<div class="item closedReceipt" data-id="'+ item.id +'" data-type="closed" onClick="selectedPayroll(this)"><div class="row"><div class="col"><p class="align-center">'+item.title+'</p><p class="align-center" style="font-size:18px;padding:5px;"><strong>'+money(item.total)+'</strong></p></div></div><div class="row"><div class="col"><p class="align-center">Dikirim tanggal<br/>'+d+' '+m+' '+Y+'</p></div><div class="col"><p class="align-center">Diterima tanggal <br/>'+d2+' '+m2+' '+Y2+'</p></div></div></div>';
                     $('#closedSection').append(html); //append your new tr
                 });
             }else{
@@ -142,4 +146,39 @@ function onClosed (id){
             }
         }
     });
+}
+
+function payrollDetail() {
+    var getId = parseInt(sessionStorage.getItem('payroll-id'));
+    var getType = sessionStorage.getItem('payroll-type');
+
+    if(getType === 'send') {
+        var getData = JSON.parse(sessionStorage.getItem('payroll'));
+    } else {
+        var getData = JSON.parse(sessionStorage.getItem('payrollClosed'));
+    }
+
+    var selected = getData.find(dt => { return dt.id === getId });
+    var content = $('#payrollDetail');
+
+    $('#payroll-title').html(selected.title)
+
+    selected.lines.forEach(function(item, index) {
+        var itemList = '<div class="row" style="margin-bottom:10px;"><div class="col"><p>' + item.description + '&nbsp; (' + item.unit +')</p></div><div class="col right"><p>'+ (item.price * item.qty) +'</p></div></div>';
+        $('#payroll-lines').append(itemList);
+    })
+
+    $('#payroll-total').html(selected.total);
+}
+
+function selectedPayroll(elem) {
+    var dataId = $(elem).attr('data-id');
+    var dataType = $(elem).attr('data-type');
+    sessionStorage.setItem('payroll-id', dataId);
+    sessionStorage.setItem('payroll-type', dataType);
+    window.location.href = "payrollDetail.html";
+}
+
+function onBackToPayroll() {
+    window.location.href = "payroll.html";
 }
