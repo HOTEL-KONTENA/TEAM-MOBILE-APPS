@@ -32,7 +32,7 @@ function sent (){
         // make sure you respect the same origin policy with this url:
         // http://en.wikipedia.org/wiki/Same_origin_policy
         url: window.localStorage.getItem('base_url')+"/hr/payroll",
-        data: { start: null, end: null, org_id : oid, 'is_closed': 0},
+        data: { start: null, end: null, org_id : oid, 'is_closed': 0, type: 'SLIP'},
         beforeSend: function (xhr) {
             /* Authorization header */
             xhr.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem('user.jwt'));
@@ -81,7 +81,7 @@ function closed (){
         // make sure you respect the same origin policy with this url:
         // http://en.wikipedia.org/wiki/Same_origin_policy
         url: window.localStorage.getItem('base_url')+"/hr/payroll",
-        data: { start: start, end: end, org_id : oid, 'is_closed': 1},
+        data: { start: start, end: end, org_id : oid, 'is_closed': 1, type: 'SLIP'},
         beforeSend: function (xhr) {
             /* Authorization header */
             xhr.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem('user.jwt'));
