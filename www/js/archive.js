@@ -11,11 +11,7 @@ function all (){
     var y = d.getFullYear();
     let td  = y+'-'+m+'-'+h+' 23:59:59';
 
-    oid = 0
-    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
-    for (let i in ps) {
-        oid = ps[i].org_id
-    }
+    const oid = sessionStorage.getItem('org.id');
 
     $.ajax({
         crossDomain: true,

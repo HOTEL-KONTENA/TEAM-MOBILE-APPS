@@ -20,11 +20,7 @@ function sent (){
       "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"
     ];
 
-    oid = 0
-    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
-    for (let i in ps) {
-        oid = ps[i].org_id
-    }
+    const oid   = sessionStorage.getItem('org.id');
 
     $.ajax({
         crossDomain: true,
@@ -67,13 +63,9 @@ function closed (){
       "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"
     ];
 
-    oid = 0
-    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
-    for (let i in ps) {
-        oid = ps[i].org_id
-    }
+    const oid   = sessionStorage.getItem('org.id');
     const start = $('#closedStart').val() + ' 00:00:00';
-    const end = $('#closedEnd').val() + ' 23:59:59';
+    const end   = $('#closedEnd').val() + ' 23:59:59';
 
     $.ajax({
         crossDomain: true,
@@ -118,11 +110,7 @@ function closed (){
 
 
 function onClosed (id){
-    oid = 0
-    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
-    for (let i in ps) {
-        oid = ps[i].org_id
-    }
+    const oid   = sessionStorage.getItem('org.id');
 
     $.ajax({
         crossDomain: true,

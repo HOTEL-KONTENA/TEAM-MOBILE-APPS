@@ -19,14 +19,9 @@ function upcoming (){
       "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"
     ];
 
-    oid = 0
-    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
-    for (let i in ps) {
-        oid = ps[i].org_id
-    }
-
+    const oid   = sessionStorage.getItem('org.id');
     const start = $('#upcomingStart').val() + ' 00:00:00';
-    const end = $('#upcomingEnd').val() + ' 23:59:59';
+    const end   = $('#upcomingEnd').val() + ' 23:59:59';
 
     $.ajax({
         crossDomain: true,
@@ -89,11 +84,7 @@ function upcoming (){
 }
 
 function onEnroll (id){
-    oid = 0
-    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
-    for (let i in ps) {
-        oid = ps[i].org_id
-    }
+    const oid   = sessionStorage.getItem('org.id');
 
     $.ajax({
         crossDomain: true,

@@ -9,11 +9,8 @@ function inboxDetail (){
       "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"
     ];
 
-    oid = 0
-    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
-    for (let i in ps) {
-        oid = ps[i].org_id
-    }
+    const oid = sessionStorage.getItem('org.id');
+
     $.ajax({
         crossDomain: true,
         type: 'GET',
@@ -80,11 +77,8 @@ function declineInbox (id){
 
 function approveInbox (id){
     if(confirm('Anda yakin menyetujui permintaan ini?')){
-        oid = 0
-        let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
-        for (let i in ps) {
-            oid = ps[i].org_id
-        }
+        const oid   = sessionStorage.getItem('org.id');
+
         $.ajax({
             crossDomain: true,
             type: 'POST',

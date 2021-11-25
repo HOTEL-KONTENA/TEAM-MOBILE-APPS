@@ -16,6 +16,7 @@ $(function() {
         hash.click()
     }
 
+    this.reloadOid()
     //1. LOAD HEADLINE
     this.headline()
     //2. LOAD HOME SECTION
@@ -25,13 +26,40 @@ $(function() {
     // this.notifs()
 });
 
+function reloadOid (){
+    let oid = sessionStorage.getItem('org.id');
+
+    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
+    $(".orgs").remove(); //remove all the tr's except first ,As you are using it as table headers.            
+    
+    for (let i in ps) {
+        if(oid && oid == ps[i].org.id) {
+            $("#oid").append("<option class='orgs' value='"+ps[i].org.id+"' selected>" +ps[i].org.name+ "</option>");
+        } else {
+            $("#oid").append("<option class='orgs' value='"+ps[i].org.id+"'>" +ps[i].org.name+ "</option>");
+        }
+    }
+
+    if(!oid) {
+        this.onChangeOid();
+    }
+}
+
+
 function headline (){
     $(".teamName").html(sessionStorage.getItem('user.name'));
+    const oid = sessionStorage.getItem('org.id');
     
     let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
     for (let i in ps) {
-        $(".teamRole").html(ps[i].role);
+        if(oid == ps[i].org_id) {
+            $(".teamRole").html(ps[i].role);
+        }
     }
+}
+
+function onChangeOid (){
+    sessionStorage.setItem('org.id', $('#oid').val());
 }
 
 function announcement (){

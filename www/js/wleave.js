@@ -15,13 +15,8 @@
 
 
 function quota (){
-    oid = 0
-    st  = '2019-12-16 00:00:00'
-    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
-    for (let i in ps) {
-        oid = ps[i].org_id
-        //st  = ps[i].created_at
-    }
+    const oid   = sessionStorage.getItem('org.id');
+    const st    = '2019-12-16 00:00:00'
     
     $.ajax({
         crossDomain: true,
@@ -47,13 +42,8 @@ function quota (){
 
 
 function quotaPH (){
-    oid = 0
-    st  = '2019-12-16 00:00:00'
-    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
-    for (let i in ps) {
-        oid = ps[i].org_id
-        //st  = ps[i].created_at
-    }
+    const oid   = sessionStorage.getItem('org.id');
+    const st    = '2019-12-16 00:00:00'
     
     $.ajax({
         crossDomain: true,
@@ -79,13 +69,8 @@ function quotaPH (){
 
 
 function quotaEO (){
-    oid = 0
-    st  = '2019-12-16 00:00:00'
-    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
-    for (let i in ps) {
-        oid = ps[i].org_id
-        //st  = ps[i].created_at
-    }
+    const oid   = sessionStorage.getItem('org.id');
+    const st    = '2019-12-16 00:00:00'
     
     $.ajax({
         crossDomain: true,
@@ -110,14 +95,10 @@ function quotaEO (){
 }
 
 function wleave() {
-    const mN = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+    const mN    = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
                 "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"];
 
-    oid = 0
-    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
-    for (let i in ps) {
-        oid = ps[i].org_id
-    }
+    const oid   = sessionStorage.getItem('org.id');
 
     $.ajax({
         crossDomain: true,
@@ -215,15 +196,11 @@ function wleaveDocument() {
 }
 
 function wleavecomponent() {
-    const mN = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+    const mN    = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
         "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC"
     ];
 
-    oid = 0
-    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
-    for (let i in ps) {
-        oid = ps[i].org_id
-    }
+    const oid   = sessionStorage.getItem('org.id');
 
     $.ajax({
         crossDomain: true,
@@ -348,14 +325,9 @@ function save() {
 }
 
 function update(elem) {
-    var dataId = $(elem).attr('data-id')
+    const oid   = sessionStorage.getItem('org.id');
+    var dataId  = $(elem).attr('data-id')
     sessionStorage.setItem('document-workleave-id', dataId)
-
-    oid = 0
-    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
-    for (let i in ps) {
-        oid = ps[i].org_id
-    }
 
     $.ajax({
         crossDomain: true,

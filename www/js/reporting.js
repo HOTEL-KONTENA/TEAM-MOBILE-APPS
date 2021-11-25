@@ -75,12 +75,7 @@ function submitReport (){
     $("#formReport").hide();
     $("#sendingReport").show();
 
-    oid = 0
-    let ps = JSON.parse(sessionStorage.getItem('user.works_in_hotel'));
-    for (let i in ps) {
-        oid = ps[i].org_id
-    }
-
+    const oid   = sessionStorage.getItem('org.id');
     schedule_id = null
 
     var ele = document.getElementsByName('schedule_ids'); 
