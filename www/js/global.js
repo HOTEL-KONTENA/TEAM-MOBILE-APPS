@@ -4,25 +4,25 @@ screen.orientation.lock('portrait-primary').then(function success() {
     console.log("Error locking the orientation :: " + errMsg);
 });
 
-window.localStorage.setItem('base_url', 'http://128.199.145.173:9888/api');
-// window.localStorage.setItem('base_url', 'https://enginev1.hotelkontena.com/api');
+// window.localStorage.setItem('base_url', 'http://128.199.145.173:9888/api');
+window.localStorage.setItem('base_url', 'https://enginev1.hotelriverstone.com/api');
 
 document.addEventListener("deviceready", onDeviceReadyFCM, false);
  
 function onDeviceReadyFCM(){
-    // FCMPlugin.onNotification(function(data){
-    //     if(data.wasTapped){
-    //       //Notification was received on device tray and tapped by the user.
-    //       window.localStorage.setItem('notif.title', data.title);
-    //     }else{
-    //       //Notification was received in foreground. Maybe the user needs to be notified.
-    //       window.localStorage.setItem('notif.title', data.title);
-    //     }
+    FCMPlugin.onNotification(function(data){
+        if(data.wasTapped){
+          //Notification was received on device tray and tapped by the user.
+          window.localStorage.setItem('notif.title', data.title);
+        }else{
+          //Notification was received in foreground. Maybe the user needs to be notified.
+          window.localStorage.setItem('notif.title', data.title);
+        }
         
-    //     if(sessionStorage.getItem('user.jwt') !== null){
-    //       window.location.href = "dashboard.html";
-    //     }
-    // });
+        if(sessionStorage.getItem('user.jwt') !== null){
+          window.location.href = "dashboard.html";
+        }
+    });
 }
 
 function onBackToDashboard(hash){

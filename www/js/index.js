@@ -21,7 +21,7 @@ var app = {
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
         // window.localStorage.setItem('base_url', 'http://128.199.145.173:9888/api');
-        window.localStorage.setItem('base_url', 'http://128.199.145.173:9888/api');
+        window.localStorage.setItem('base_url', 'https://enginev1.hotelriverstone.com/api');
     },
 
     // deviceready Event Handler
