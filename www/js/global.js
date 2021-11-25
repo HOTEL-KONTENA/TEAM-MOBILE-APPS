@@ -4,8 +4,8 @@ screen.orientation.lock('portrait-primary').then(function success() {
     console.log("Error locking the orientation :: " + errMsg);
 });
 
-// window.localStorage.setItem('base_url', 'https://sandy.hotelkontena.com/api');
-window.localStorage.setItem('base_url', 'https://enginev1.hotelkontena.com/api');
+window.localStorage.setItem('base_url', 'https://sandy.hotelkontena.com/api');
+// window.localStorage.setItem('base_url', 'https://enginev1.hotelkontena.com/api');
 
 document.addEventListener("deviceready", onDeviceReadyFCM, false);
  

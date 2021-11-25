@@ -7,20 +7,8 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "id.thunderlab.kontenaPartner"
-    },
     "cordova-plugin-camera": {
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
-      "PACKAGE_NAME": "id.thunderlab.kontenaPartner"
-    },
-    "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "id.thunderlab.kontenaPartner"
-    },
-    "cordova-plugin-mock-gps-checker": {
-      "PACKAGE_NAME": "id.thunderlab.kontenaTeam"
-    },
-    "cordova-plugin-screen-orientation": {
       "PACKAGE_NAME": "id.thunderlab.kontenaTeam"
     },
     "cordova-plugin-fcm-with-dependecy-updated": {
@@ -28,6 +16,18 @@
       "FCM_VERSION": "18.0.0",
       "GRADLE_TOOLS_VERSION": "3.5.0",
       "GOOGLE_SERVICES_VERSION": "4.2.0",
+      "PACKAGE_NAME": "id.thunderlab.kontenaTeam"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "id.thunderlab.kontenaTeam"
+    },
+    "cordova-plugin-mock-gps-checker": {
+      "PACKAGE_NAME": "id.thunderlab.kontenaTeam"
+    },
+    "cordova-plugin-screen-orientation": {
+      "PACKAGE_NAME": "id.thunderlab.kontenaTeam"
+    },
+    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "id.thunderlab.kontenaTeam"
     }
   },

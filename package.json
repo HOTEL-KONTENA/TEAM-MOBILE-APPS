@@ -39,9 +39,9 @@
       "cordova-plugin-fcm-with-dependecy-updated": {}
     },
     "platforms": [
-      "android",
       "ios",
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }

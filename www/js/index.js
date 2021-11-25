@@ -20,8 +20,8 @@ var app = {
     // Application Constructor
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
-        // window.localStorage.setItem('base_url', 'https://sandy.hotelkontena.com/api');
-        window.localStorage.setItem('base_url', 'https://enginev1.hotelkontena.com/api');
+        window.localStorage.setItem('base_url', 'https://sandy.hotelkontena.com/api');
+        // window.localStorage.setItem('base_url', 'https://enginev1.hotelkontena.com/api');
     },
 
     // deviceready Event Handler
